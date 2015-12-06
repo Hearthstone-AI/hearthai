@@ -1,34 +1,35 @@
 package hearthAI;
 
+import java.util.Stack;
+
 public class Player {
 
-	Card deck[];
+	Stack<Card> deck = new Stack();
+	//Card deck[];
 	int total = 0;
 	Card field[];
 	Card graveyard[];
 	Card hand[];
+	int handSize;
 	
-	public Player(Card d[]){
-		deck = d;
-	}
+	
 	
 	public Player() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public void draw(){
 		total--;
+		handSize++;
 		
 	}
 	
 	public void printDeck(){
-		for(Card c: deck){
-			c.print();
-		}
+		
 	}
 	
 	public void addToDeck(Card c){
-		deck[total] = c;
+		deck.push(c);
 		total++;
 		
 	}
