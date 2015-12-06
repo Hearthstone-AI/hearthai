@@ -14,6 +14,11 @@ public class Minion implements Card {
 		attack = Integer.parseInt(string[2]);
 		health = Integer.parseInt(string[3]);
 	}
+	
+	@Override public String toString() {
+		String card = ("Name: " + name + " Cost: " + cost + " Attack: " + attack + " Health: " + health);
+		return card;
+	}
 
 
 

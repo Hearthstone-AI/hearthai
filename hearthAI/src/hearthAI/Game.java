@@ -12,6 +12,9 @@ public class Game {
 	public static void main(String[] args){
 		
 		ArrayList<Card> cards = parseCSV();
+		Player p1 = new Player();
+		Player p2 = new Player();
+		for
 		
 	}
 	

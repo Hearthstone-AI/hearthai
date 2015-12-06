@@ -9,5 +9,9 @@ public class Spell implements Card{
 		name = string[0];
 		cost = Integer.parseInt(string[1]);
 	}
+	
+	@Override public String toString() {
+		
+	}
 
 }

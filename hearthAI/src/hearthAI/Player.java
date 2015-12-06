@@ -11,7 +11,15 @@ public class Player {
 		deck = d;
 	}
 	
+	public Player() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void draw(){
+		
+	}
+	
+	public void printDeck(){
 		
 	}
 	
