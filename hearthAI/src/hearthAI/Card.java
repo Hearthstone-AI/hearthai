@@ -9,6 +9,8 @@ public interface Card {
 		
 	}
 	
+	public void print();
+	
 	
 	
 	
