@@ -7,11 +7,17 @@ public class Spell implements Card{
 	
 	public Spell(String[] string) {
 		name = string[0];
-		cost = Integer.parseInt(string[1]);
+		cost = Integer.parseInt(string[2]);
+	}
+	
+	public void print(){
+		System.out.println("Name: " + name + " Cost: " + cost);
 	}
 	
 	@Override public String toString() {
-		
+		StringBuilder result = new StringBuilder();
+		result.append("Name: " + name + " Cost: " + cost);
+		return result.toString();
 	}
 
 }

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +15,24 @@ public class Game {
 		ArrayList<Card> cards = parseCSV();
 		Player p1 = new Player();
 		Player p2 = new Player();
-		for
+		
+		
+		for(int i = 0; i < 30; i++){
+			int idx = new Random().nextInt(cards.size());
+			Card add = cards.get(idx);
+			System.out.println("Adding card: ");
+			add.print();
+			p1.addToDeck(add);
+		}
+		for(int i = 0; i < 30; i++){
+			int idx = new Random().nextInt(cards.size());
+			Card add = cards.get(idx);
+			p2.addToDeck(add);
+		}
+		System.out.println("Deck of player 1: ------------------");
+		p1.printDeck();
+		System.out.println("Deck of player 2: ------------------");
+		p2.printDeck();
 		
 	}
 	
@@ -28,7 +46,7 @@ public class Game {
 		String fileData = null;
         String cards[] = null;
         String record = null;
-        ArrayList<Card> allcards = new ArrayList();;
+        ArrayList<Card> allcards = new ArrayList();
  
         try{
             //Read file and get data
@@ -52,19 +70,21 @@ public class Game {
                 String[] recordData = record.split(",");
                 
                 //Write to console after changing !@ back to ,
-                System.out.println(recordData[0].replaceAll("!@", ",") + " -- " +
+                /*System.out.println(recordData[0].replaceAll("!@", ",") + " -- " +
                         recordData[1].replaceAll("!@", ",") + " -- " +
                         recordData[2].replaceAll("!@", ",") + " -- " +
                         recordData[3].replaceAll("!@", ",") + " -- " +
                         recordData[4].replaceAll("!@", ",") + " -- " +
                         recordData[5].replaceAll("!@", ",") + " -- " +
                         recordData[4].replaceAll("!@", ",") + " -- " +
-                        recordData[4].replaceAll("!@", ","));
+                        recordData[4].replaceAll("!@", ","));*/
                 if(recordData[1] == "Minion"){
+                	
                 	Minion m = new Minion(recordData);
                 	allcards.add(m);
                 }
                 else{
+                	
                 	Spell s = new Spell(recordData);
                 	allcards.add(s);
                 }
