@@ -3,6 +3,7 @@ package hearthAI;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,15 +11,16 @@ public class Game {
 
 	public static void main(String[] args){
 		
-		
+		ArrayList<Card> cards = parseCSV();
 		
 	}
 	
-	private static String[] parseCSV(){
+	private static ArrayList<Card> parseCSV(){
 		final String fileLoc = "C:/Users/Owner/Desktop/hunter.csv";
 		String fileData = null;
         String cards[] = null;
         String record = null;
+        ArrayList<Card> allcards = new ArrayList();;
  
         try{
             //Read file and get data
@@ -51,14 +53,20 @@ public class Game {
                         recordData[4].replaceAll("!@", ",") + " -- " +
                         recordData[4].replaceAll("!@", ","));
                 if(recordData[1] == "Minion"){
-                	Card 
+                	Minion m = new Minion(recordData);
+                	allcards.add(m);
                 }
+                else{
+                	Spell s = new Spell(recordData);
+                	allcards.add(s);
+                }
+                
                         
             }
         }catch(Exception e){
             System.out.println("An error occurred: " + e.getMessage());
         }
-        return cards;
+        return allcards;
 	}
 	
 	/**
