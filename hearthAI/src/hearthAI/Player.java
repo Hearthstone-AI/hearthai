@@ -11,6 +11,7 @@ public class Player {
 	Card graveyard[];
 	Card hand[];
 	int handSize;
+	int health = 30;
 	
 	
 	
@@ -22,6 +23,10 @@ public class Player {
 		total--;
 		handSize++;
 		
+	}
+	
+	public int getHealth(){
+		return health;
 	}
 	
 	public void printDeck(){

@@ -34,6 +34,10 @@ public class Game {
 		System.out.println("Deck of player 2: ------------------");
 		p2.printDeck();
 		
+		while(p1.getHealth()!= 0 && p2.getHealth()!= 0){
+			//Alternate turns until game over
+		}
+		
 	}
 	
 
