@@ -18,8 +18,13 @@ public class Game {
 		
 	}
 	
+<<<<<<< Updated upstream
 	private static ArrayList<Card> parseCSV(){
 		final String fileLoc = "C:/Users/Owner/Desktop/hunter.csv";
+=======
+	private static String[] parseCSV(){
+		final String fileLoc = "../../hunter.csv";
+>>>>>>> Stashed changes
 		String fileData = null;
         String cards[] = null;
         String record = null;
