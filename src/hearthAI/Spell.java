@@ -2,12 +2,18 @@ package hearthAI;
 
 public class Spell implements Card{
 
-	int cost = 0;
-	String name = "";
+	int cost;
+	String name;
+	
+	public Spell(){
+		cost = 0;
+		name = "";
+	}
 	
 	public Spell(String[] string) {
-		name = string[0];
-		cost = Integer.parseInt(string[2]);
+		name = string[CSV.Name.val()];
+		if ((string.length > CSV.Cost.val()) && (string[CSV.Cost.val()] != "")) cost = Integer.parseInt(string[CSV.Cost.val()]);
+		else cost = 0;
 	}
 	
 	public void print(){
