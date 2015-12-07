@@ -43,7 +43,6 @@ Stonetusk Boar,Minion,1,1,1,<b>Charge</b>,Charge,,Beast,,
 Stormpike Commando,Minion,5,4,2,<b>Battlecry:</b> Deal 2 damage.,Battlecry,,,1,2
 Stormwind Champion,Minion,7,6,6,Your other minions have +1/+1.,Aura,,,1,
 Stormwind Knight,Minion,4,2,5,<b>Charge</b>,Charge,,,,
-The Coin,Spell,,,,Gain 1 Mana Crystal this turn only.,,,,,
 Voodoo Doctor,Minion,1,2,1,<b>Battlecry:</b> Restore 2 Health.,Battlecry,,,0,2
 War Golem,Minion,7,7,7,,,,,,
 Wolfrider,Minion,3,3,1,<b>Charge</b>,Charge,,,,
@@ -60,3 +59,4 @@ Starving Buzzard,Minion,5,3,2,"Whenever you summon a Beast, draw a card.",Aura,H
 Timber Wolf,Minion,1,1,1,Your other Beasts have +1 Attack.,Aura,Hunter,Beast,3,
 Tracking,Spell,1,,,Look at the top three cards of your deck. Draw one and discard the others.,,Hunter,,,
 Tundra Rhino,Minion,5,2,5,Your Beasts have <b>Charge</b>.,,Hunter,Beast,,
+The Coin,Spell,0,,,Gain 1 Mana Crystal this turn only.,,,,,

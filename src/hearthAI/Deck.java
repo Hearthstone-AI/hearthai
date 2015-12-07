@@ -1,34 +1,45 @@
 package hearthAI;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Stack;
 
 public class Deck {
-	private Stack<Card> deck;
-	private int size;
+	private ArrayList<Card> deck;
+	private int size = 0;
 	
 	public Deck(){
-		deck = new Stack<Card>();
-		size = 0;
+		deck = new ArrayList<Card>();
 	}
 	
 	public void addCard(Card c){
-		deck.push(c);
+		deck.add(c);
 		size++;
 	}
 	
+	public void appendDeck(Deck d){
+		while(!d.isEmpty()){
+			addCard(d.draw());
+			size++;
+		}
+	}
+	
 	public void shuffle(){
+		deck.trimToSize();
 		Collections.shuffle(deck);
 	}
 	
+	public boolean isEmpty(){
+		return !(size > 0);
+	}
+	
 	public Card draw(){
-		size--;
-		return deck.pop();
+		if(size > 0){ return deck.remove(--size);}
+		else return null;
 	}
 	
 	public void print(){
 		for(int i = 0; i < size; i++){
-			deck.elementAt(i).print();
+			deck.get(i).print();
 		}
 	}
 }

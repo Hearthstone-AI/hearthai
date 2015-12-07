@@ -101,7 +101,7 @@ public class Card{
 	
 	public void setReady(){ ready = true;}
 	
-	public Card attacked (Card m){
+	public Card attacked(Card m){
 		int incoming = (m.attack + m.attackbuff);
 		damage += incoming;
 		if (guru && (incoming > 0)) attackbuff +=3;
@@ -120,7 +120,7 @@ public class Card{
 		case "Gnomish Inventor" : battlecry = makeCardFromName("Draw1", Game.specialCards); break;
 		case "Grimscale Oracle" : aura = new Card("Buff", 0, 1, "Murloc", "All"); break;
 		case "Murloc Tidehunter" : battlecry = makeCardFromName("Murloc Scout", Game.specialCards); break;
-		case "Nightblade" : battlecry = makeCardFromName("Damage3Hero", Game.specialCards); break;
+		case "Nightblade" : battlecry = makeCardFromName("DamageHero3", Game.specialCards); break;
 		case "Radi Leader" : aura = new Card("Buff", 0, 1, "", "Friendly"); break;
 		case "Razorfen Hunter" : battlecry = makeCardFromName("Boar", Game.specialCards); break;
 		case "Shattered Sun Cleric" : battlecry = makeCardFromName("Buff1/1", Game.specialCards); break;
@@ -137,11 +137,16 @@ public class Card{
 		for(int i = 0; i < source.size(); i++){
 			if(source.get(i)[0].equals(name)) return (new Card(source.get(i)));
 		}
+		System.out.println("Card not found: " + name);
 		return null;
 	}
 	
 	public void print(){
 		System.out.println("Name: " + name + " Cost: " + cost + " Attack: " + attack + " Health: " + health);
+	}
+	
+	public String getName(){
+		return name;
 	}
 	
 	@Override

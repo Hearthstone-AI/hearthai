@@ -3,13 +3,20 @@ package hearthAI;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Game {
 
 	final static boolean DEBUGPRINT = false;
+	final static boolean GAMECONSOLE = true;
 	final static boolean CONSOLEIN = false;
 	final static String cardCSVFile = "res/cards.csv";
 	final static String specialCSVFile = "res/special.csv";
+	final static String p1Deck = "res/decklist.csv";
+	final static String p2Deck = "res/decklist.csv";
+	final static boolean USECUSTOM1 = true;
+	final static boolean USECUSTOM2 = true;
+	final static ArrayList<String[]> allCards = new ArrayList<String[]>(); 
 	final static ArrayList<String[]> specialCards = new ArrayList<String[]>(); 
 
 	public static void main(String[] args) {
@@ -21,23 +28,50 @@ public class Game {
 		for(int i = 0; i < 11; i++) cardList[i] = new Deck();
 		
 		Game.parseCSV(specialCards, specialCSVFile);
+		Game.parseCSV(allCards, cardCSVFile);
 		Game.parseCSV(cardList, cardCSVFile);
+		
+		if(GAMECONSOLE)
+			System.out.println("All Parsed");
 		
 		if(DEBUGPRINT)
 			for(int i = 0; i < 11; i++) cardList[i].print();
 		
-		Player p1 = new Player();
-		Player p2 = new Player();
+		State gameState = new State();
 		
-		 
-		while(p1.getHealth()!= 0 && p2.getHealth()!= 0){
-			//Alternate turns until game over
+		if(USECUSTOM1){
+			gameState.setDeck(makeCustomDeck(p1Deck), 1);
+			if(DEBUGPRINT)
+				gameState.getPlayer(1).printDeck();
+		}
+		if(USECUSTOM2){
+			gameState.setDeck(makeCustomDeck(p2Deck), 2);
+			if(DEBUGPRINT)
+				gameState.getPlayer(2).printDeck();
+		}
+		
+		if(GAMECONSOLE)
+			System.out.println("Custom Decks Loaded");
+		
+		int first = (int) (Math.random() * 2) + 1;
+		gameState.startGame(first);
+		
+		if(GAMECONSOLE){
+			System.out.println("Game Started");
+			System.out.println("Going First: " + first);
+			System.out.print("Player 1 Hand: ");
+			gameState.getPlayer(1).printHand();
+			System.out.print("Player 2 Hand: ");
+			gameState.getPlayer(2).printHand();
+		}
+		//Alternate turns until game over
+		while(gameState.gameOver() > 0){
+			
 		} 
 	}
 	
-	//CSV parse helper method
+	//CSV parse helper method writing to deck
 	private static void parseCSV(Deck[] cardList, String file) {
-
 		try {
 			// Read file and get data
 			FileReader fr = new FileReader(file);
@@ -75,39 +109,56 @@ public class Game {
 					Card s = new Card(splitLine);
 					cardList[cardClass].addCard(s);
 				}
-			}
-			
+			}		
 			br.close();
-			fr.close();
-			
+			fr.close();		
 		}
-		catch (Exception e) {
-			System.out.println("An error occurred: " + e.getMessage());
-		}
+		catch (Exception e) { System.out.println("An error occurred: " + e.getMessage());}
 	}
 	
-	//CSV parse helper method
-		private static void parseCSV(ArrayList<String[]> cardList, String file) {
+	//CSV parse helper method writing to CSV array
+	private static void parseCSV(ArrayList<String[]> cardList, String file) {
+		try {
+			// Read file and get data
+			FileReader fr = new FileReader(file);
+			BufferedReader br = new BufferedReader(fr);
 
-			try {
-				// Read file and get data
-				FileReader fr = new FileReader(file);
-				BufferedReader br = new BufferedReader(fr);
-
-				String line;
-				
-				//Iterate through file
-				while ((line = br.readLine()) != null) {
-					String[] splitLine = line.split(",");
-					if (DEBUGPRINT)
-						System.out.println(splitLine[CSV.Name.val()] + " " + splitLine[CSV.Type.val()]);
-					cardList.add(splitLine);
-				}
-				br.close();
-				fr.close();
+			String line;
+			
+			//Iterate through file
+			while ((line = br.readLine()) != null) {
+				String[] splitLine = line.split(",");
+				if (DEBUGPRINT)
+					System.out.println(splitLine[CSV.Name.val()] + " " + splitLine[CSV.Type.val()]);
+				cardList.add(splitLine);
 			}
-			catch (Exception e) {
-				System.out.println("An error occurred: " + e.getMessage());
-			}
+			br.close();
+			fr.close();
 		}
+		catch (Exception e) { System.out.println("An error occurred: " + e.getMessage());}
+	}
+
+	//Creating a custom deck from a file
+	private static Deck makeCustomDeck(String file){
+		Deck deck = new Deck();
+		try {
+			// Read file and get data
+			FileReader fr = new FileReader(file);
+			BufferedReader br = new BufferedReader(fr);
+	
+			String line;
+
+			//Iterate through file
+			while ((line = br.readLine()) != null) {
+				String[] splitLine = line.split(",");
+				String card = splitLine[0];
+				deck.addCard(Card.makeCardFromName(card, allCards));
+			}
+			br.close();
+			fr.close();
+			return deck;
+		}
+		catch (Exception e) { System.out.println("An error occurred: " + e.getMessage());}
+		return deck;
+	}
 }
