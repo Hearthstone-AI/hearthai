@@ -10,9 +10,10 @@ public enum Class {
 	Hunter(6),
 	Warlock(7),
 	Mage(8),
-	Priest(9);
+	Priest(9),
+	Special(10);
 	
-	int val;
+	private int val;
 	
 	private Class(int i){ val = i;}
 	public int val(){ return val;}

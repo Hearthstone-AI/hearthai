@@ -9,9 +9,11 @@ public enum CSV {
 	Text(5),
 	Mech(6),
 	Class(7),
-	Race(8);
+	Race(8),
+	Special1(9),
+	Special2(10);
 	
-	int val;
+	private int val;
 	
 	private CSV(int i){ val = i;}
 	public int val(){ return val;}
