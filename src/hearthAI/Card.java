@@ -66,10 +66,16 @@ public class Card{
 		if(type.equals("Spell") && (string.length > CSV.Special2.val())) spelltype = string[CSV.Special2.val()];
 	}
 	
-	public void buff(Card c){
-		attackbuff += c.attack;
-		healthbuff += c.health;
-		taunt = c.taunt;
+	public void buff(Card c, boolean buff){
+		if(buff){
+			attackbuff += c.attack;
+			healthbuff += c.health;
+		}
+		else{
+			attackbuff -= c.attack;
+			healthbuff -= c.health;
+		}
+		if(c.taunt) taunt = true;
 	}
 	
 	public void buff(int cst, int atk, int hp){
@@ -84,8 +90,6 @@ public class Card{
 		healthbuff += hp;
 		taunt = tn;
 	}
-	
-	
 	
 	public int getBaseHealth(){ return health;}
 	public int getBuffHealth(){ return healthbuff;}
@@ -130,18 +134,18 @@ public class Card{
 		case "Frostwolf Warlord" : battlecry = makeCardFromName("FrostWolf", Game.specialCards); break;
 		case "Novice Engineer" : 
 		case "Gnomish Inventor" : battlecry = makeCardFromName("Draw1", Game.specialCards); break;
-		case "Grimscale Oracle" : aura = new Card("Buff", 0, 1, "Murloc", "All"); break;
+		case "Grimscale Oracle" : aura = new Card("Aura", 0, 1, "Murloc", "All"); break;
 		case "Murloc Tidehunter" : battlecry = makeCardFromName("Murloc Scout", Game.specialCards); break;
 		case "Nightblade" : battlecry = makeCardFromName("DamageHero3", Game.specialCards); break;
-		case "Radi Leader" : aura = new Card("Buff", 0, 1, "", "Friendly"); break;
+		case "Radi Leader" : aura = new Card("Aura", 0, 1, "", "Friendly"); break;
 		case "Razorfen Hunter" : battlecry = makeCardFromName("Boar", Game.specialCards); break;
 		case "Shattered Sun Cleric" : battlecry = makeCardFromName("Buff1/1", Game.specialCards); break;
 		case "Stormpike Commando"  : battlecry = makeCardFromName("Damage2", Game.specialCards); break;
-		case "Stormwind Champion" : aura = new Card("Buff", 1, 1, "", "Friendly"); break;
+		case "Stormwind Champion" : aura = new Card("Aura", 1, 1, "", "Friendly"); break;
 		case "Voodoo Doctor" : battlecry = makeCardFromName("Heal2", Game.specialCards); break;
 		case "Houndmaster" : battlecry = makeCardFromName("Hound", Game.specialCards); break;
 		case "Starving Buzzard" : aura = new Card("Buzzard", 0, 0, "", ""); break;
-		case "Timber Wolf" : aura = new Card("Buff", 0, 1, "Beast", "All"); break;
+		case "Timber Wolf" : aura = new Card("Aura", 0, 1, "Beast", "All"); break;
 		}
 	}
 	

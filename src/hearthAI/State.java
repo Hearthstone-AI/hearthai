@@ -40,6 +40,8 @@ public class State {
 		else return 0;
 	}
 	
+	public int getStateValue(int p){
+
 	public void setDeck(Deck d, int p){
 		if (p == 1) player1.setDeck(d);
 		else if (p == 2) player2.setDeck(d);

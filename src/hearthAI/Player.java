@@ -74,7 +74,7 @@ public class Player extends Card{
 			return re;
 		}
 		if(c.spelltype == "Buff"){
-			target.buff(c);
+			target.buff(c, true);
 			return null;
 		}
 		if(c.spelltype == "Draw"){
@@ -105,8 +105,25 @@ public class Player extends Card{
 			re.add(((Player) target).field.get(tmp1).attacked(3));
 			re.add(((Player) target).field.get(tmp2).attacked(3));
 			return re;
+		case "Tracking" : 
+			draw();
+			deck.draw();
+			deck.draw();
+			return null;
+		case "The Coin" :
+			availmana++;
+			return null;
+		default : 
+			System.out.println("Error: Playing Card - Card Not found");
 		}
 		return null;
+	}
+
+	public void handleAura(Card c, boolean play, boolean enemy){
+		if((c.target.equals("All") || c.target.equals("Friendly")) && !enemy){
+			if(!c.race.equals("")) for(Card fd : field) if(fd.race.equals(c.race)) fd.buff(c, play);
+			else for(Card fd1 : field) fd1.buff(c, play);
+		}
 	}
 	
 	public void newTurn(){
@@ -169,6 +186,12 @@ public class Player extends Card{
 		}
 		return re;
 	}
+	
+	/*
+	public ArrayList<Card> getAvailMoves(){
+		for(Card hn : hand)
+	}
+	*/
 	
 	public void printHand(){
 		String print = "";

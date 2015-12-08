@@ -38,6 +38,7 @@ public class Game {
 		
 		State gameState = new State();
 		
+		/*
 		if(USECUSTOM1){
 			gameState.setDeck(makeCustomDeck(p1Deck), 1);
 			if(DEBUGPRINT)
@@ -66,7 +67,8 @@ public class Game {
 		//Alternate turns until game over
 		while(gameState.gameOver() > 0){
 			
-		} 
+		}
+		*/
 	}
 	
 	//CSV parse helper method writing to deck
