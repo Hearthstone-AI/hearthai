@@ -21,6 +21,7 @@ public class Card{
 	protected String race = "";
 	protected String type = "";
 	protected String target = "";
+	protected String spelltype = "";
 	
 	public Card(){
 	}
@@ -48,11 +49,9 @@ public class Card{
 		name = string[CSV.Name.val()];
 		type = string[CSV.Type.val()];
 		if((string.length > CSV.Cost.val()) && !(string[CSV.Cost.val()].equals(""))) cost = Integer.parseInt(string[CSV.Cost.val()]);
-		else cost = 0;
 		if((string.length > CSV.Attack.val()) && !(string[CSV.Attack.val()].equals(""))) attack = Integer.parseInt(string[CSV.Attack.val()]);
-		else attack = 0;
 		if((string.length > CSV.Health.val()) && !(string[CSV.Health.val()].equals(""))) health = Integer.parseInt(string[CSV.Health.val()]);
-		else health = 0;
+		if((string.length > CSV.Race.val()) && !(string[CSV.Race.val()].equals(""))) race = string[CSV.Race.val()];
 		if((string.length > CSV.Mech.val()) && !(string[CSV.Mech.val()].equals(""))){
 			switch (string[CSV.Mech.val()]){
 			case "Taunt" : taunt = true; break;
@@ -64,6 +63,13 @@ public class Card{
 		}
 		if(name.equals("Gurubashi Berserker")) guru = true;
 		if(type.equals("Spell") && (string.length > CSV.Special1.val())) target = string[CSV.Special1.val()];
+		if(type.equals("Spell") && (string.length > CSV.Special2.val())) spelltype = string[CSV.Special2.val()];
+	}
+	
+	public void buff(Card c){
+		attackbuff += c.attack;
+		healthbuff += c.health;
+		taunt = c.taunt;
 	}
 	
 	public void buff(int cst, int atk, int hp){
@@ -79,10 +85,7 @@ public class Card{
 		taunt = tn;
 	}
 	
-	public void heal(int hp){
-		damage -= hp;
-		if(damage < 0) damage = 0;
-	}
+	
 	
 	public int getBaseHealth(){ return health;}
 	public int getBuffHealth(){ return healthbuff;}
@@ -101,9 +104,18 @@ public class Card{
 	
 	public void setReady(){ ready = true;}
 	
+	public Card attacked(int hp){
+		damage += hp;
+		if (damage < 0) damage = 0;
+		if (guru && (hp > 0)) attackbuff +=3;
+		if(damage >= (health+healthbuff)) return this;
+		else return null;
+	}
+	
 	public Card attacked(Card m){
 		int incoming = (m.attack + m.attackbuff);
 		damage += incoming;
+		if (damage < 0) damage = 0;
 		if (guru && (incoming > 0)) attackbuff +=3;
 		if(damage >= (health+healthbuff)) return this;
 		else return null;

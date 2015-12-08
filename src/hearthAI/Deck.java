@@ -28,6 +28,10 @@ public class Deck {
 		Collections.shuffle(deck);
 	}
 	
+	public void trim(){
+		deck.trimToSize();
+	}
+	
 	public boolean isEmpty(){
 		return !(size > 0);
 	}

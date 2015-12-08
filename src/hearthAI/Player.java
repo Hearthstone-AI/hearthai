@@ -8,12 +8,12 @@ public class Player extends Card{
 	private int handSize = 0;
 	private int availmana = 0;
 	private int totalmana = 0;
-	private int fieldSize = 0;
+	private int fieldsize = 0;
 	private int heroclass = 0;
 	private ArrayList<Card> hand = new ArrayList<Card>();
 	private ArrayList<Card> field = new ArrayList<Card>();
 	private Deck deck = new Deck();
-	private Deck played = new Deck();
+	private Deck history = new Deck();
 	
 	public Player() {
 		health = 30;
@@ -26,12 +26,12 @@ public class Player extends Card{
 		handSize = hs;
 		availmana = am;
 		totalmana = tm;
-		fieldSize = fs;
+		fieldsize = fs;
 		heroclass = hc;
 		hand = hd;
 		field = fd;
 		deck = dk;
-		played = pl;
+		history = pl;
 		type = "Player";
 	}
 	
@@ -51,8 +51,62 @@ public class Player extends Card{
 		hand.add(Card.makeCardFromName(name, Game.allCards));
 	}
 	
-	public void playCard(Card c){
-		
+	public Card playMinion(Card c, boolean fromhand){
+		field.add(c);
+		fieldsize++;
+		if(fromhand) availmana -= c.cost;
+		if(hand.remove(c)) handSize--;
+		if(c.battlecry != null){
+			return battlecry;
+		}
+		if(c.aura != null){
+			return aura;
+		}
+		return null;
+	}
+	
+	public ArrayList<Card> playSpell(Card c, Card target, Card source, boolean fromhand){
+		ArrayList<Card> re = new ArrayList<Card>();
+		if(fromhand) availmana -= c.cost;
+		if(hand.remove(c)) handSize--;
+		if((c.spelltype == "Damage") || (c.spelltype == "Heal")){
+			re.add(target.attacked(c));
+			return re;
+		}
+		if(c.spelltype == "Buff"){
+			target.buff(c);
+			return null;
+		}
+		if(c.spelltype == "Draw"){
+			draw();
+			return null;
+		}
+		switch(c.name){
+		case "Heal2All" :
+			for(Card fd : field) c.attacked(-2); this.attacked(-2); return null;
+		case "FrostWolf" : source.buff(0, (fieldsize - 1), (fieldsize - 1)); return null;
+		case "DamageHero3" : target.attacked(3);
+		case "Animal Companion" :
+			int tmp = (int) (Math.random() * 3);
+			if(tmp == 0) playMinion(Card.makeCardFromName("Misha", Game.specialCards), false);
+			if(tmp == 1) playMinion(Card.makeCardFromName("Huffer", Game.specialCards), false);
+			if(tmp == 2) playMinion(Card.makeCardFromName("Leokk", Game.specialCards), false);
+			return null;
+		case "Hunter's Mark" : target.healthbuff = -target.health + 1;
+		case "Kill Command" : 
+			boolean hasbeast = false;
+			for(Card fd : field) if(fd.race.equals("Beast")) hasbeast = true;
+			if(hasbeast){ re.add(target.attacked(5)); return re;}
+			else{ re.add(target.attacked(3)); return re;}
+		case "Multi-Shot" :
+			int tmp1 = (int) (Math.random() * ((Player) target).field.size());
+			int tmp2;
+			while ((tmp2 = (int) (Math.random() * ((Player) target).field.size())) == tmp1){;}
+			re.add(((Player) target).field.get(tmp1).attacked(3));
+			re.add(((Player) target).field.get(tmp2).attacked(3));
+			return re;
+		}
+		return null;
 	}
 	
 	public void newTurn(){
@@ -81,10 +135,38 @@ public class Player extends Card{
 		return re;
 	}
 	
-	public ArrayList<Card> getSpellTargets(){
+	public ArrayList<Card> getSpellTargets(Card c, boolean enemy){
 		ArrayList<Card> re = new ArrayList<Card>();
-		re.addAll(field);
-		re.add(this);
+		if(c.race.equals("")){
+			if((c.spelltype.equals("Damage") && enemy) || (c.spelltype.equals("Heal") && !enemy)){
+				re.add(this);
+			}
+			if(!c.spelltype.equals("Special")){
+				re.addAll(field);
+			}
+			else{
+				switch(c.name){
+				case "Heal2All" : 
+				case "Animal Companion" :
+				case "Multi-Shot" :
+				case "Tracking" :
+				case "The Coin" : return null;
+				case "Kill Command" : 
+					if(enemy){
+						re.add(this);
+						re.addAll(field);
+					}
+					break;
+				case "Hunter's Mark" : if(enemy) re.addAll(field); break;
+				case "DamageHero3" : if(enemy) re.add(this); break;
+				}
+			}
+		}
+		else{
+			for(Card fd : field){
+				if(c.race.equals(fd.race)) re.add(fd);
+			}
+		}
 		return re;
 	}
 	
