@@ -1,5 +1,7 @@
 package hearthAI;
 
+import java.util.ArrayList;
+
 public class State {
 	
 	private Player player1;
@@ -40,8 +42,19 @@ public class State {
 		else return 0;
 	}
 	
-	public int getStateValue(int p){
-
+	public int getStateValue(boolean p1){
+		if (p1) return (player1.getEffectiveHealth() - player2.getEffectiveHealth());
+		else return (player2.getEffectiveHealth() - player1.getEffectiveHealth());
+	}
+	
+	public void setStateValue(int i){
+		player1.healthbuff = i;
+	}
+	
+	public ArrayList<State> enumerateMoves(boolean first, boolean enemy){
+		return null;
+	}
+	
 	public void setDeck(Deck d, int p){
 		if (p == 1) player1.setDeck(d);
 		else if (p == 2) player2.setDeck(d);

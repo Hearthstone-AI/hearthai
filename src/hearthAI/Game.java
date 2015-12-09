@@ -3,6 +3,7 @@ package hearthAI;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Game {
 
@@ -67,8 +68,13 @@ public class Game {
 		//Alternate turns until game over
 		while(gameState.gameOver() > 0){
 			
+		}*/
+		
+		Scanner in = new Scanner(System.in);
+		while(true){
+			String s = in.next();
+
 		}
-		*/
 	}
 	
 	//CSV parse helper method writing to deck

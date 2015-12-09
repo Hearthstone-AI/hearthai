@@ -46,17 +46,17 @@ Stormwind Knight,Minion,4,2,5,<b>Charge</b>,Charge,,,,
 Voodoo Doctor,Minion,1,2,1,<b>Battlecry:</b> Restore 2 Health.,Battlecry,,,0,2
 War Golem,Minion,7,7,7,,,,,,
 Wolfrider,Minion,3,3,1,<b>Charge</b>,Charge,,,,
-Animal Companion,Spell,3,,,Summon a random Beast Companion.,,Hunter,,,
-Arcane Shot,Spell,1,,,Deal $2 damage.,,Hunter,,,
-Houndmaster,Minion,4,4,3,<b>Battlecry:</b> Give a friendly Beast +2/+2 and <b>Taunt</b>.,Battlecry,Hunter,,2,8
+Animal Companion,Spell,3,,,Summon a random Beast Companion.,,Hunter,,,Special
+Arcane Shot,Spell,1,2,,Deal $2 damage.,,Hunter,,All,Damage
+Houndmaster,Minion,4,4,3,<b>Battlecry:</b> Give a friendly Beast +2/+2 and <b>Taunt</b>.,Battlecry,Hunter,,,
 Huffer,Minion,3,4,2,<b>Charge</b>,Charge,Hunter,Beast,,
-Hunter's Mark,Spell,0,,,Change a minion's Health to 1.,,Hunter,,,
-Kill Command,Spell,3,,,"Deal $3 damage. If you have a Beast, deal $5 damage instead.",,Hunter,,,
+Hunter's Mark,Spell,0,,,Change a minion's Health to 1.,,Hunter,,All,Special
+Kill Command,Spell,3,,,"Deal $3 damage. If you have a Beast, deal $5 damage instead.",,Hunter,,All,Special
 Leokk,Minion,3,2,4,Your other minions have +1 Attack.,,Hunter,Beast,,
 Misha,Minion,3,4,4,<b>Taunt</b>,Taunt,Hunter,Beast,,
-Multi-Shot,Spell,4,,,Deal $3 damage to two random enemy minions.,,Hunter,,,
-Starving Buzzard,Minion,5,3,2,"Whenever you summon a Beast, draw a card.",Aura,Hunter,Beast,4,
-Timber Wolf,Minion,1,1,1,Your other Beasts have +1 Attack.,Aura,Hunter,Beast,3,
-Tracking,Spell,1,,,Look at the top three cards of your deck. Draw one and discard the others.,,Hunter,,,
+Multi-Shot,Spell,4,,,Deal $3 damage to two random enemy minions.,,Hunter,,Enemy,Special
+Starving Buzzard,Minion,5,3,2,"Whenever you summon a Beast, draw a card.",Aura,Hunter,Beast,,
+Timber Wolf,Minion,1,1,1,Your other Beasts have +1 Attack.,Aura,Hunter,Beast,,
+Tracking,Spell,1,,,Look at the top three cards of your deck. Draw one and discard the others.,,Hunter,,,Special
 Tundra Rhino,Minion,5,2,5,Your Beasts have <b>Charge</b>.,,Hunter,Beast,,
-The Coin,Spell,0,,,Gain 1 Mana Crystal this turn only.,,,,,
+The Coin,Spell,0,,,Gain 1 Mana Crystal this turn only.,,,,,Special

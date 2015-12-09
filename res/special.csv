@@ -6,12 +6,12 @@ Mechanical Dragonling,Minion,1,2,1,,,,Mech,,
 Huffer,Minion,3,4,2,<b>Charge</b>,Charge,,Beast,,
 Leokk,Minion,3,2,4,Your other minions have +1 Attack.,Aura,,Beast,2,5
 Misha,Minion,3,4,4,<b>Taunt</b>,Taunt,,Beast,,
-Heal2All,Spell,0,-2,0,,,,,Friendly,
-Damage1,Spell,0,1,0,,,,,All,
-FrostWolf,Spell,0,1,1,,,,,,
-Draw1,Spell,0,0,0,,,,,,
-DamageHero3,Spell,0,3,0,,,,,Enemy,
-Buff1/1,Spell,0,1,1,,,,,Friendly,
-Heal2,Spell,0,-2,0,,,,,All,
-Hound,Spell,0,2,2,,Taunt,,,Friendly,
-Damage2,Spell,0,2,0,,,,,All,
+Heal2All,Spell,0,-2,0,,,,,Friendly,Special
+Damage1,Spell,0,1,0,,,,,All,Damage
+FrostWolf,Spell,0,1,1,,,,,,Special
+Draw1,Spell,0,0,0,,,,,,Draw
+DamageHero3,Spell,0,3,0,,,,,EnemyHero,Special
+Buff1/1,Spell,0,1,1,,,,,Friendly,Buff
+Heal2,Spell,0,-2,0,,,,,All,Heal
+Hound,Spell,0,2,2,,Taunt,,Beast,Friendly,Buff
+Damage2,Spell,0,2,0,,,,,All,Damage
