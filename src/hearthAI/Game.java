@@ -88,11 +88,13 @@ public class Game {
 						case "Summon":
 							
 							System.out.println("Enter the name of the monster");
-							String q = in.nextLine();
+							String q = in.next();
 							Card c = Card.makeCardFromName(q,allCards);
-							if(gameState.getPlayer(1).hand.contains(c))
+							if(gameState.getPlayer(1).hand.contains(c)){
+								System.out.println("Playing " + c.toString());
 								gameState.getPlayer(1).playMinion(c,true);
-							c.toString();
+							}
+							
 							continue;
 							
 						case "Spell":
@@ -156,11 +158,13 @@ public class Game {
 					case "Summon":
 						
 						System.out.println("Enter the name of the monster");
-						String q = in.nextLine();
+						String q = in.next();
 						Card c = Card.makeCardFromName(q,allCards);
-						if(gameState.getPlayer(1).hand.contains(c))
+						if(gameState.getPlayer(1).hand.contains(c)){
+							System.out.println("Playing " + c.toString());
 							gameState.getPlayer(1).playMinion(c,true);
-						c.toString();
+						}
+						
 						continue;
 						
 					case "Spell":
