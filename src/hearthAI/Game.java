@@ -80,31 +80,47 @@ public class Game {
 					String s = in.next();
 					switch(s){
 						case "End":
+							
 							System.out.println("Turn Over");
 							turn = false;
 							break;
+							
 						case "Summon":
+							
 							System.out.println("Enter the name of the monster");
-							String q = in.next();
-							//gameState.getPlayer(1).playMinion(c,true);
+							String q = in.nextLine();
+							Card c = Card.makeCardFromName(q,allCards);
+							if(gameState.getPlayer(1).hand.contains(c))
+								gameState.getPlayer(1).playMinion(c,true);
+							c.toString();
 							continue;
+							
 						case "Spell":
+							
 							System.out.println("Enter the name of the spell");
 							String r = in.next();
+							Card spell = Card.makeCardFromName(r,allCards);
 							System.out.println("Possible targets: ");
-							ArrayList<Card> targets = gameState.getPlayer(2).getSpellTargets(c,true);
-							gameState.getPlayer(1).playSpell(c,t,s,true);
+							ArrayList<Card> targets = gameState.getPlayer(2).getSpellTargets(spell,true);
+							System.out.println("Choose target: ");
+							String chosen = in.next();
+							if(targets.contains(chosen))
+								//gameState.getPlayer(1).playSpell(spell,chosen,s,true);
+							spell.toString();
 							continue;	
+							
 						case "Attack":
+							
 							System.out.println("Choose monster to attack with");
 							String a = in.next();
 							System.out.println("Possible targets: ");
-							ArrayList<Card> targets = gameState.getPlayer(2).getMinionTargets();
-							if(targets.size()==0)
+							ArrayList<Card> attackTargets = gameState.getPlayer(2).getMinionTargets();
+							if(attackTargets.size()==0)
 								System.out.println("No possible targets: ");
-							for(Card c: targets)
-								c.print();
+							for(Card d: attackTargets)
+								d.print();
 							continue;
+							
 						default:
 							continue;	
 						}
@@ -131,32 +147,50 @@ public class Game {
 					while(turn){
 					String s = in.next();
 					switch(s){
-						case "End":
-							System.out.println("Turn Over");
-							turn = false;
-							break;
-						case "Summon":
-							System.out.println("Enter the name of the monster");
-							String q = in.next();
-							//gameState.getPlayer(1).playMinion(c,true);
-							continue;
-						case "Spell":
-							System.out.println("Enter the name of the spell");
-							String r = in.next();
-							//gameState.getPlayer(1).playSpell(c,t,s,true);
-							continue;	
-						case "Attack":
-							System.out.println("Choose monster to attack with");
-							String a = in.next();
-							System.out.println("Possible targets: ");
-							ArrayList<Card> targets = gameState.getPlayer(2).getMinionTargets();
-							if(targets.size()==0)
-								System.out.println("No possible targets: ");
-							for(Card c: targets)
-								c.print();
-							continue;
-						default:
-							continue;	
+					case "End":
+						
+						System.out.println("Turn Over");
+						turn = false;
+						break;
+						
+					case "Summon":
+						
+						System.out.println("Enter the name of the monster");
+						String q = in.nextLine();
+						Card c = Card.makeCardFromName(q,allCards);
+						if(gameState.getPlayer(1).hand.contains(c))
+							gameState.getPlayer(1).playMinion(c,true);
+						c.toString();
+						continue;
+						
+					case "Spell":
+						
+						System.out.println("Enter the name of the spell");
+						String r = in.next();
+						Card spell = Card.makeCardFromName(r,allCards);
+						System.out.println("Possible targets: ");
+						ArrayList<Card> targets = gameState.getPlayer(2).getSpellTargets(spell,true);
+						System.out.println("Choose target: ");
+						String chosen = in.next();
+						if(targets.contains(chosen))
+							//gameState.getPlayer(1).playSpell(spell,chosen,s,true);
+						spell.toString();
+						continue;	
+						
+					case "Attack":
+						
+						System.out.println("Choose monster to attack with");
+						String a = in.next();
+						System.out.println("Possible targets: ");
+						ArrayList<Card> attackTargets = gameState.getPlayer(2).getMinionTargets();
+						if(attackTargets.size()==0)
+							System.out.println("No possible targets: ");
+						for(Card d: attackTargets)
+							d.print();
+						continue;
+						
+					default:
+						continue;	
 					}
 							
 				}

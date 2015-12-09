@@ -10,7 +10,7 @@ public class Player extends Card{
 	private int totalmana = 0;
 	private int fieldsize = 0;
 	private int heroclass = 0;
-	private ArrayList<Card> hand = new ArrayList<Card>();
+	public ArrayList<Card> hand = new ArrayList<Card>();
 	private ArrayList<Card> field = new ArrayList<Card>();
 	private Deck deck = new Deck();
 	private Deck history = new Deck();
