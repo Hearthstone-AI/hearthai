@@ -31,15 +31,15 @@ public class Game {
 		Game.parseCSV(allCards, cardCSVFile);
 		Game.parseCSV(cardList, cardCSVFile);
 		
-		if(GAMECONSOLE)
-			System.out.println("All Parsed");
+		//if(GAMECONSOLE)
+			//System.out.println("All Parsed");
 		
 		if(DEBUGPRINT)
 			for(int i = 0; i < 11; i++) cardList[i].print();
 		
 		State gameState = new State();
 		
-		/*
+		
 		if(USECUSTOM1){
 			gameState.setDeck(makeCustomDeck(p1Deck), 1);
 			if(DEBUGPRINT)
@@ -51,8 +51,8 @@ public class Game {
 				gameState.getPlayer(2).printDeck();
 		}
 		
-		if(GAMECONSOLE)
-			System.out.println("Custom Decks Loaded");
+		//if(GAMECONSOLE)
+			//System.out.println("Custom Decks Loaded");
 		
 		int first = (int) (Math.random() * 2) + 1;
 		gameState.startGame(first);
@@ -65,16 +65,106 @@ public class Game {
 			System.out.print("Player 2 Hand: ");
 			gameState.getPlayer(2).printHand();
 		}
-		//Alternate turns until game over
-		while(gameState.gameOver() > 0){
-			
-		}*/
 		
 		Scanner in = new Scanner(System.in);
-		while(true){
-			String s = in.next();
-
+		if(first == 1){
+			//Play game
+			while(gameState.gameOver() > 0){
+				//Player's turn
+				System.out.println("Your Turn");
+				gameState.getPlayer(1).newTurn();
+				gameState.getPlayer(1).printHand();
+				System.out.println("Current mana: " + gameState.getPlayer(1).getAvailMana());
+				boolean turn = true;
+				while(turn){
+					String s = in.next();
+					switch(s){
+						case "End":
+							System.out.println("Turn Over");
+							turn = false;
+							break;
+						case "Summon":
+							System.out.println("Enter the name of the monster");
+							String q = in.next();
+							//gameState.getPlayer(1).playMinion(c,true);
+							continue;
+						case "Spell":
+							System.out.println("Enter the name of the spell");
+							String r = in.next();
+							//gameState.getPlayer(1).playSpell(c,t,s,true);
+							continue;	
+						case "Attack":
+							System.out.println("Choose monster to attack with");
+							String a = in.next();
+							System.out.println("Possible targets: ");
+							ArrayList<Card> targets = gameState.getPlayer(2).getMinionTargets();
+							if(targets.size()==0)
+								System.out.println("No possible targets: ");
+							for(Card c: targets)
+								c.print();
+							continue;
+						default:
+							continue;	
+						}
+						
+					}
+					
+					//AI's turn
+					System.out.println("AI's Turn");
+					continue;
+				}
+			
+			}
+			else{
+				while(gameState.gameOver() > 0){
+					//AI's turn
+					System.out.println("AI's Turn");
+					
+					//Player's turn
+					System.out.println("Your Turn");
+					gameState.getPlayer(1).newTurn();
+					gameState.getPlayer(1).printHand();
+					System.out.println("Current mana: " + gameState.getPlayer(1).getAvailMana());
+					boolean turn = true;
+					while(turn){
+					String s = in.next();
+					switch(s){
+						case "End":
+							System.out.println("Turn Over");
+							turn = false;
+							break;
+						case "Summon":
+							System.out.println("Enter the name of the monster");
+							String q = in.next();
+							//gameState.getPlayer(1).playMinion(c,true);
+							continue;
+						case "Spell":
+							System.out.println("Enter the name of the spell");
+							String r = in.next();
+							//gameState.getPlayer(1).playSpell(c,t,s,true);
+							continue;	
+						case "Attack":
+							System.out.println("Choose monster to attack with");
+							String a = in.next();
+							System.out.println("Possible targets: ");
+							ArrayList<Card> targets = gameState.getPlayer(2).getMinionTargets();
+							if(targets.size()==0)
+								System.out.println("No possible targets: ");
+							for(Card c: targets)
+								c.print();
+							continue;
+						default:
+							continue;	
+					}
+							
+				}
 		}
+		if(gameState.gameOver()==1)
+			System.out.println("You Win!");
+		else
+			System.out.println("AI Wins");
+			}
+		
 	}
 	
 	//CSV parse helper method writing to deck

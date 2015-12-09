@@ -193,6 +193,10 @@ public class Player extends Card{
 	}
 	*/
 	
+	public int getAvailMana(){
+		return availmana;
+	}
+	
 	public void printHand(){
 		String print = "";
 		for(Card c : hand) print += (c.getName() + " | ");
