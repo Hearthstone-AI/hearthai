@@ -91,7 +91,9 @@ public class Game {
 						case "Spell":
 							System.out.println("Enter the name of the spell");
 							String r = in.next();
-							//gameState.getPlayer(1).playSpell(c,t,s,true);
+							System.out.println("Possible targets: ");
+							ArrayList<Card> targets = gameState.getPlayer(2).getSpellTargets(c,true);
+							gameState.getPlayer(1).playSpell(c,t,s,true);
 							continue;	
 						case "Attack":
 							System.out.println("Choose monster to attack with");
